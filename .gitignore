@@ -1,0 +1,63 @@
+# -----------------------------
+# Node / React
+# -----------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build
+build/
+dist/
+.next/
+out/
+
+# Env files (segredos)
+.env
+.env.*
+!.env.example
+
+# Cache
+.cache/
+.eslintcache
+
+# Coverage / tests
+coverage/
+
+# -----------------------------
+# .NET
+# -----------------------------
+bin/
+obj/
+
+
+# Rider / VSCode / VS
+.vs/
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Publish output
+publish/
+wwwroot/dist/
+
+# -----------------------------
+# App settings / secrets
+# -----------------------------
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+# (mantém o padrão versionado)
+appsettings.json
+
+# -----------------------------
+# OS files
+# -----------------------------
+.DS_Store
+Thumbs.db
+
+
