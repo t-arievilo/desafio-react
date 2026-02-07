@@ -44,7 +44,7 @@ namespace backend.Services.AuthServices
                 Usuario = usuarioRegistro.Usuario,
                 Email = usuarioRegistro.Email,
                 SenhaHash = senhaHash,
-                senhaSalt = senhaSalt,
+                SenhaSalt = senhaSalt,
                 Status = true
             };
 
@@ -57,7 +57,35 @@ namespace backend.Services.AuthServices
 
         }
 
-        public async Task<bool> VerificaSeEmaileUsuarioExiste(UsuarioCriacaoDto usuarioRegistro)
+        public async Task<Response<string>> Login(UsuarioLoginDto usuarioLogin)
+        {
+            Response<string> respostaServico = new Response<string>();
+
+            var usuario = await _context.Usuario.FirstOrDefaultAsync(usuarioBanco =>
+                usuarioBanco.Email == usuarioLogin.Email);
+            
+            if (usuario == null)
+            {
+                SetCredencialInvalida();
+                return respostaServico;
+            }
+
+            if (!_senhaInterface.VerificaSenhaHash(
+                usuarioLogin.Senha,
+                usuario.SenhaHash,
+                usuario.SenhaSalt
+            )); 
+            {
+                SetCredencialInvalida();
+                return respostaServico;
+            }
+
+
+            void SetCredencialInvalida()
+            {
+                respostaServico.Mensagem = "Credenciais Inválidas";
+            }
+        }        public async Task<bool> VerificaSeEmaileUsuarioExiste(UsuarioCriacaoDto usuarioRegistro)
         {
             var usuario = await _context.Usuario.FirstOrDefaultAsync(
                 usuarioBanco =>
