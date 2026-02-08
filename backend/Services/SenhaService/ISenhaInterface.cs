@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Models;
 
 namespace backend.Services.SenhaService
 {
@@ -9,6 +10,6 @@ namespace backend.Services.SenhaService
     {
         void CriarSenhaHash(string senha, out byte[] senhaHash, out byte[] senhaSalt);
         bool VerificaSenhaHash(string senha, byte[] senhaHash, byte[] senhaSalt);
-        
+        string CriarToken(UsuarioModel usuario);
     }
 }

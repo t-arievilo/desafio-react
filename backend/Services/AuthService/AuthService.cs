@@ -82,13 +82,16 @@ namespace backend.Services.AuthServices
                 return respostaServico;
             }
 
+            var token = _senhaInterface.CriarToken(usuario);
+
             if (!usuario.Status)
             {
                 respostaServico.Mensagem = "Usuário Inativo";
                 respostaServico.Dados = null;
                 return respostaServico;
             }
-            respostaServico.Dados = usuario.Email;
+            
+            respostaServico.Dados = token;
             respostaServico.Status = true;
             respostaServico.Mensagem = "Login realizado com sucesso";
             return respostaServico;
