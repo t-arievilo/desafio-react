@@ -22,4 +22,24 @@ function RegistrarUsuario(dadosUsuario) {
     });
 }
 
-export { RegistrarUsuario };
+function FazerLogin(credenciais) {
+  return fetch(`${URL_BASE_API}/Auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: credenciais.email,
+      senha: credenciais.senha,
+    }),
+  })
+    .then(function (resposta) {
+      return resposta.json();
+    })
+    .catch(function (erro) {
+      console.error("Erro ao fazer login", erro);
+      throw erro;
+    });
+}
+
+export { RegistrarUsuario, FazerLogin };
