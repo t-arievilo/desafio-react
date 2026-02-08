@@ -1,4 +1,5 @@
 using backend.Data;
+using backend.Middleware;
 using backend.Services.AuthServices;
 using backend.Services.SenhaService;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +30,10 @@ if (app.Environment.IsDevelopment())
     
 }
 
+app.UseMiddleware<TratamentoDeErro>();
+
 app.UseHttpsRedirection();
+
 app.MapControllers();
 
 
