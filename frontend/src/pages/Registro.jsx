@@ -5,8 +5,11 @@ import CampoTexto from "../components/CampoTexto";
 import Botao from "../components/Botao";
 import { RegistrarUsuario } from "../services/apiService";
 import CampoRadio from "../components/CampoRadio";
+import { useNavigate } from "react-router-dom";
 
 function Registro() {
+  const navigate = useNavigate();
+
   const [usuario, setUsuario] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -49,6 +52,10 @@ function Registro() {
           setMensagemSucesso(
             resposta.mensagem || "Usuário registrado com sucesso!",
           );
+
+          setTimeout(function () {
+            navigate("/login");
+          }, 2000);
         } else {
           setMensagemErro(resposta.mensagem || "Erro ao registrar usuário");
         }

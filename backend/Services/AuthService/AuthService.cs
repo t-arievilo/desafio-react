@@ -45,7 +45,7 @@ namespace backend.Services.AuthServices
                 Email = usuarioRegistro.Email,
                 SenhaHash = senhaHash,
                 SenhaSalt = senhaSalt,
-                Status = true,
+                Status = usuarioRegistro.Status,
             };
 
             _context.Add(usuario);
