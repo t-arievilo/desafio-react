@@ -1,3 +1,4 @@
+using System.Text.Json;
 using backend.Data;
 using backend.Middleware;
 using backend.Services.AuthServices;
@@ -9,7 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    });;
 builder.Services.AddScoped<IAuthInterface, AuthService>();
 builder.Services.AddScoped<ISenhaInterface, SenhaService>();
 builder.Services.AddDbContext<AppDbContext>(options =>

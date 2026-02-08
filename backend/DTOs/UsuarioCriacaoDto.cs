@@ -11,7 +11,7 @@ namespace backend.DTOs
         [Required(ErrorMessage = "O campo usuário é obrigatório")]
         public string Usuario { get; set; }
 
-        [Required(ErrorMessage = "O campo usuário é obrigatório"), EmailAddress(ErrorMessage = "Formato de Email inválido")]
+        [Required(ErrorMessage = "O campo email é obrigatório"), EmailAddress(ErrorMessage = "Formato de Email inválido")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "O campo senha é obrigatório")]

@@ -45,7 +45,7 @@ namespace backend.Services.AuthServices
                 Email = usuarioRegistro.Email,
                 SenhaHash = senhaHash,
                 SenhaSalt = senhaSalt,
-                Status = usuarioRegistro.Status,
+                Status = true,
             };
 
             _context.Add(usuario);
@@ -88,7 +88,8 @@ namespace backend.Services.AuthServices
                 respostaServico.Dados = null;
                 return respostaServico;
             }
-
+            respostaServico.Dados = usuario.Email;
+            respostaServico.Status = true;
             respostaServico.Mensagem = "Login realizado com sucesso";
             return respostaServico;
 
