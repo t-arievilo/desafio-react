@@ -4,12 +4,14 @@ import Card from "../components/Card";
 import CampoTexto from "../components/CampoTexto";
 import Botao from "../components/Botao";
 import { RegistrarUsuario } from "../services/apiService";
+import CampoRadio from "../components/CampoRadio";
 
 function Registro() {
   const [usuario, setUsuario] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmaSenha, setConfirmaSenha] = useState("");
+  const [status, setStatus] = useState(true);
   const [mensagemErro, setMensagemErro] = useState("");
   const [mensagemSucesso, setMensagemSucesso] = useState("");
   const [carregando, setCarregando] = useState("");
@@ -38,6 +40,7 @@ function Registro() {
       email: email,
       senha: senha,
       confirmaSenha: confirmaSenha,
+      status: !!status,
     };
 
     RegistrarUsuario(dadosUsuario)
@@ -127,6 +130,16 @@ function Registro() {
                 obrigatório={true}
               />
 
+              <CampoRadio
+                label="Status da Conta"
+                nome="status"
+                valorSelecionado={status}
+                aoMudar={setStatus}
+                opcoes={[
+                  { id: "ativo", texto: "Ativo", valor: true },
+                  { id: "inativo", texto: "Inativo", valor: false },
+                ]}
+              />
               <Botao
                 texto={carregando ? "Registrando..." : "Registrar"}
                 tipo="submit"
@@ -135,7 +148,7 @@ function Registro() {
 
               <div className="text-center mt-3">
                 <small>
-                  Já tem conta? <a href="/registro">Faça login aqui</a>
+                  Já tem conta? <a href="/login">Faça login aqui</a>
                 </small>
               </div>
             </form>
