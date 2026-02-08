@@ -42,4 +42,19 @@ function FazerLogin(credenciais) {
     });
 }
 
-export { RegistrarUsuario, FazerLogin };
+function AcessarSurpresa(token) {
+  return fetch(`${URL_BASE_API}/ApiBloqueadaJwt`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((resposta) => resposta.json())
+    .catch((erro) => {
+      console.error("Erro ao acessar área privada", erro);
+      throw erro;
+    });
+}
+
+export { RegistrarUsuario, FazerLogin, AcessarSurpresa };

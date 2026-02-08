@@ -10,12 +10,12 @@ function Header(props) {
   }
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-      <div className="container">
+      <div className="container-fluid px-4">
         <Link className="navbar-brand" to="/">
           Sistema de Autenticação
         </Link>
 
-        <div className="navbar-nav ms-auto">
+        <div className="navbar-nav d-flex flex-row align-items-center gap-3">
           {props.mostrarLogout ? (
             <>
               <span className="navbar-text text-white me-3">

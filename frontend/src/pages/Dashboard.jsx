@@ -7,12 +7,14 @@ import {
   ObterNomeUsuario,
   ObterToken,
 } from "../services/authService";
+import { AcessarSurpresa } from "../services/apiService";
 
 function Dashboard() {
   const navigate = useNavigate();
 
   const [nomeUsuario, setNomeUsuario] = useState("");
   const [token, setToken] = useState("");
+  const [mensagemSurpresa, setMensagemSurpresa] = useState("");
 
   useEffect(function () {
     VerificarAutenticacao();
@@ -31,6 +33,16 @@ function Dashboard() {
 
     setNomeUsuario(usuario);
     setToken(tokenSalvo);
+  }
+
+  function TestarEndpointPrivado() {
+    AcessarSurpresa(token).then((resposta) => {
+      if (resposta.status === false) {
+        setMensagemSurpresa("Acesso Negado!");
+      } else {
+        setMensagemSurpresa(resposta.mensagem);
+      }
+    });
   }
 
   return (
@@ -58,6 +70,19 @@ function Dashboard() {
                   </code>
                 </div>
               </div>
+
+              <button
+                className="btn btn-success mt-3"
+                onClick={TestarEndpointPrivado}
+              >
+                Acessar Endpoint Privado
+              </button>
+
+              {mensagemSurpresa && (
+                <div className="alert alert-success mt-3">
+                  {mensagemSurpresa}
+                </div>
+              )}
             </div>
           </Card>
         </div>
