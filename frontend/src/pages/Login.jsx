@@ -28,7 +28,7 @@ function Login() {
     FazerLogin(credenciais)
       .then(function (resposta) {
         if (resposta.status === true) {
-          SalvarDadosUsuario(resposta.dados, email);
+          SalvarDadosUsuario(resposta.dados.token, resposta.dados.usuario);
           navigate("/dashboard");
         } else {
           setMensagemErro(resposta.mensagem || "Erro ao fazer login");
