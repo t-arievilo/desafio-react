@@ -58,9 +58,9 @@ namespace backend.Services.AuthServices
 
         }
 
-        public async Task<Response<string>> Login(UsuarioLoginDto usuarioLogin)
+        public async Task<Response<UsuarioRespostaTokenDto>> Login(UsuarioLoginDto usuarioLogin)
         {
-            Response<string> respostaServico = new Response<string>();
+            Response<UsuarioRespostaTokenDto> respostaServico = new Response<UsuarioRespostaTokenDto>();
 
             var usuario = await _context.Usuario.FirstOrDefaultAsync(usuarioBanco =>
                 usuarioBanco.Email == usuarioLogin.Email);
@@ -90,8 +90,12 @@ namespace backend.Services.AuthServices
                 respostaServico.Dados = null;
                 return respostaServico;
             }
-            
-            respostaServico.Dados = token;
+
+            respostaServico.Dados = new UsuarioRespostaTokenDto
+            {
+                Token = token,
+                Usuario = usuario.Usuario
+            };
             respostaServico.Status = true;
             respostaServico.Mensagem = "Login realizado com sucesso";
             return respostaServico;

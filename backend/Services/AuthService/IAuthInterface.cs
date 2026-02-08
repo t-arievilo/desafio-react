@@ -11,6 +11,6 @@ namespace backend.Services.AuthServices
     {
         Task<Response<UsuarioCriacaoDto>> Registrar(UsuarioCriacaoDto usuarioRegistro);
     
-        Task<Response<string>> Login(UsuarioLoginDto usuarioLogin);
+        Task<Response<UsuarioRespostaTokenDto>> Login(UsuarioLoginDto usuarioLogin);
     }
 }

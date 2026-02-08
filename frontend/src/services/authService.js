@@ -1,13 +1,17 @@
-const CHAVE_EMAIL_USUARIO = "nomeUsuario";
+const CHAVE_NOME_USUARIO = "nomeUsuario";
 const CHAVE_TOKEN = "tokenUsuario";
 
-function SalvarDadosUsuario(token, emailUsuario) {
+function SalvarDadosUsuario(token, nomeUsuario) {
   localStorage.setItem(CHAVE_TOKEN, token);
-  localStorage.setItem(CHAVE_EMAIL_USUARIO, emailUsuario);
+  localStorage.setItem(CHAVE_NOME_USUARIO, nomeUsuario);
 }
 
 function ObterToken() {
   return localStorage.getItem(CHAVE_TOKEN);
+}
+
+function ObterNomeUsuario() {
+  return localStorage.getItem(CHAVE_NOME_USUARIO);
 }
 
 function VerificarSeEstaAutenticado() {
@@ -15,4 +19,9 @@ function VerificarSeEstaAutenticado() {
   return token !== null && token !== "";
 }
 
-export { SalvarDadosUsuario };
+export {
+  SalvarDadosUsuario,
+  VerificarSeEstaAutenticado,
+  ObterNomeUsuario,
+  ObterToken,
+};
