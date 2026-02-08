@@ -11,6 +11,7 @@ function RegistrarUsuario(dadosUsuario) {
       email: dadosUsuario.email,
       senha: dadosUsuario.senha,
       confirmaSenha: dadosUsuario.confirmaSenha,
+      status: dadosUsuario.status,
     }),
   })
     .then(function (resposta) {
