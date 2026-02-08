@@ -52,6 +52,7 @@ namespace backend.Services.AuthServices
             await _context.SaveChangesAsync();
 
             respostaServico.Mensagem = "Usuário criado com sucesso";
+            respostaServico.Status = true;
 
             return respostaServico;
 
