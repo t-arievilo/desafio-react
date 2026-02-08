@@ -32,6 +32,11 @@ git clone https://github.com/t-arievilo/desafio-react.git
 ```
 cd desafio-react
 ```
+Nota: para previnir alguns erros de pacotes e certificados, segue alguns comandos que podem ajudar:
+```
+dotnet dev-certs https --trust
+dotnet tool install --global dotnet-ef
+```
 
 ### 3. Abra sua IDE na pasta
 
