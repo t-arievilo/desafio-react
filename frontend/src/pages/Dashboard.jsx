@@ -11,7 +11,7 @@ import {
 function Dashboard() {
   const navigate = useNavigate();
 
-  const [emailUsuario, setEmailUsuario] = useState("");
+  const [nomeUsuario, setNomeUsuario] = useState("");
   const [token, setToken] = useState("");
 
   useEffect(function () {
@@ -29,17 +29,17 @@ function Dashboard() {
     const usuario = ObterNomeUsuario();
     const tokenSalvo = ObterToken();
 
-    setEmailUsuario(usuario);
+    setNomeUsuario(usuario);
     setToken(tokenSalvo);
   }
 
   return (
-    <Layout emailUsuario={emailUsuario}>
+    <Layout nomeUsuario={nomeUsuario} mostrarLogout={true}>
       <div className="row justify-content-center mt-5">
         <div className="col-md-8">
           <Card>
             <div className="text-center">
-              <h2 className="mb-4"> Bem-vindo, {emailUsuario}!</h2>
+              <h2 className="mb-4"> Bem-vindo, {nomeUsuario}!</h2>
 
               <div className="alert alert-info mt-4">
                 <h5>Use seu token para acessar o endpoint privado:</h5>

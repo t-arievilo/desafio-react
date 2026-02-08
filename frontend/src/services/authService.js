@@ -19,9 +19,15 @@ function VerificarSeEstaAutenticado() {
   return token !== null && token !== "";
 }
 
+function RemoverDadosDoUsuario() {
+  localStorage.removeItem(CHAVE_TOKEN);
+  localStorage.removeItem(CHAVE_NOME_USUARIO);
+}
+
 export {
   SalvarDadosUsuario,
   VerificarSeEstaAutenticado,
   ObterNomeUsuario,
   ObterToken,
+  RemoverDadosDoUsuario,
 };
