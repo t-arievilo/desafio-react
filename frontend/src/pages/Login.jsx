@@ -5,8 +5,11 @@ import CampoTexto from "../components/CampoTexto";
 import Botao from "../components/Botao";
 import { FazerLogin } from "../services/apiService";
 import { SalvarDadosUsuario } from "../services/authService";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [mensagemErro, setMensagemErro] = useState("");
@@ -26,6 +29,7 @@ function Login() {
       .then(function (resposta) {
         if (resposta.status === true) {
           SalvarDadosUsuario(resposta.dados, email);
+          navigate("/dashboard");
         } else {
           setMensagemErro(resposta.mensagem || "Erro ao fazer login");
         }
