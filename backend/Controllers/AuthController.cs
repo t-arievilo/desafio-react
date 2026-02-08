@@ -25,5 +25,12 @@ namespace backend.Controllers
             var resposta = await _authInterface.Registrar(usuarioRegistro);
             return Ok(resposta);
         }
+
+        [HttpPost("login")]
+        public async Task<ActionResult> Login(UsuarioLoginDto usuarioLogin)
+        {
+            var resposta = await _authInterface.Login(usuarioLogin);
+            return Ok(resposta);
+        }
     }
 }

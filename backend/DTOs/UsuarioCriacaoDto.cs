@@ -19,7 +19,7 @@ namespace backend.DTOs
 
         [Compare("Senha", ErrorMessage = "As senhas não são iguais")]
         public string ConfirmaSenha { get; set; }  
-        public bool Status { get; set; } = true; 
+        public bool Status { get; set; } 
 
     }
 }

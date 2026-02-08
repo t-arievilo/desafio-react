@@ -26,7 +26,7 @@ namespace backend.Services.AuthServices
         {
             Response<UsuarioCriacaoDto> respostaServico = new Response<UsuarioCriacaoDto>();
 
-            if (!await VerificaSeEmaileUsuarioExiste(usuarioRegistro))
+            if (await VerificaSeUsuarioJaExiste(usuarioRegistro))
             {
                 respostaServico.Dados = null;
                 respostaServico.Mensagem = "Email ou Usuário já cadastrados";
@@ -45,7 +45,7 @@ namespace backend.Services.AuthServices
                 Email = usuarioRegistro.Email,
                 SenhaHash = senhaHash,
                 SenhaSalt = senhaSalt,
-                Status = true
+                Status = usuarioRegistro.Status,
             };
 
             _context.Add(usuario);
@@ -74,26 +74,41 @@ namespace backend.Services.AuthServices
                 usuarioLogin.Senha,
                 usuario.SenhaHash,
                 usuario.SenhaSalt
-            )); 
+            ))
+
             {
                 SetCredencialInvalida();
                 return respostaServico;
             }
+
+            if (!usuario.Status)
+            {
+                respostaServico.Mensagem = "Usuário Inativo";
+                respostaServico.Dados = null;
+                return respostaServico;
+            }
+
+            respostaServico.Mensagem = "Login realizado com sucesso";
+            return respostaServico;
 
 
             void SetCredencialInvalida()
             {
                 respostaServico.Mensagem = "Credenciais Inválidas";
             }
-        }        public async Task<bool> VerificaSeEmaileUsuarioExiste(UsuarioCriacaoDto usuarioRegistro)
+        }        
+        
+        public async Task<bool> VerificaSeUsuarioJaExiste(UsuarioCriacaoDto usuarioRegistro)
         {
             var usuario = await _context.Usuario.FirstOrDefaultAsync(
                 usuarioBanco =>
                    usuarioBanco.Email == usuarioRegistro.Email || usuarioBanco.Usuario == usuarioRegistro.Usuario
             );
 
-            if (usuario != null) return false;
+            if (usuario != null)
             return true;
+
+            return false;
         }
     }
 }
